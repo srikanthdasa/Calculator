@@ -1,20 +1,30 @@
-pipeline{
-  agent any 
-  stages{
-    stage('clone'){
-      steps{
-        git branch:'main',url:https://github.com/srikanthdasa/Calculator.git
+pipeline {
+   agent any
+     stages {
+        stage('clone') {
+           steps {
+           git branch:'main', url: ';
           }
-    }
-    stage('compile'){
-      steps{
-        sh'javac claculator.java'
-      }
-    }
-    stage('build'){
-      steps{
-        sh'java calculator 25 5'
-      }
-    }
-  }
+        }
+        stage('compile') {
+           steps {
+           sh 'javac Calculator.java'
+          }
+        }
+        stage('build') {
+           steps {
+           sh 'java Calculator 25 5'
+           }
+        }
+       stage('test') {
+           steps {
+           sh 'java Calculator 30 -5'
+           }
+        }
+       stage('Deploy') {
+           steps {
+           echo 'Deployment completed'
+           }
+        }
+}
 }
